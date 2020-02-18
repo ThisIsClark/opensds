@@ -26,7 +26,6 @@ import (
 	"github.com/opensds/opensds/pkg/model"
 	pb "github.com/opensds/opensds/pkg/model/proto"
 	"github.com/opensds/opensds/pkg/utils"
-	"github.com/opensds/opensds/pkg/utils/config"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -35,11 +34,11 @@ type Driver struct {
 	client *OceanStorClient
 }
 
-func (d *Driver) Setup() (err error) {
+func (d *Driver) Setup(configPath string) (err error) {
 	// Read huawei oceanstor config file
 	conf := &OceanStorConfig{}
 	d.conf = conf
-	path := config.CONF.OsdsDock.Backends.HuaweiOceanStorBlock.ConfigPath
+	path := configPath
 
 	if "" == path {
 		path = defaultConfPath
